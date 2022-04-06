@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:garden/counter/counter.dart';
-import 'package:garden/counter/view/counter_page.dart';
-import 'package:garden/home/cubit/home_cubit.dart';
-import 'package:garden/home/view/home_view.dart';
+import 'package:garden/module/common/db_cubit.dart';
+import 'package:garden/module/home/cubit/home_cubit.dart';
+import 'package:garden/route/app_pages.dart';
+import 'package:garden/route/app_routes.dart';
 
 class GardenApp extends StatelessWidget {
   const GardenApp({Key? key}) : super(key: key);
@@ -12,39 +13,15 @@ class GardenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => CounterCubit(),
-        ),
-        BlocProvider<HomeCubit>(
-          create: (BuildContext context) => HomeCubit(),
-        ),
+        BlocProvider(create: (_) => CounterCubit(),),
+        BlocProvider(create: (_) => DatabaseCubit(),),
+        BlocProvider<HomeCubit>(create: (BuildContext context) => HomeCubit(),),
       ],
-      child: const MaterialApp(
-        title: '',
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeView(),
-        routes: {},
-      ),
-    );
-    return MaterialApp(
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => CounterCubit(),
-          ),
-          BlocProvider<HomeCubit>(
-            create: (BuildContext context) => HomeCubit(),
-          ),
-          // BlocProvider<BlocC>(
-          //   create: (BuildContext context) => BlocC(),
-          // ),
-        ],
-        child: const HomeView(),
+        initialRoute: Routes.root,
+        routes: routes,
       ),
     );
   }
 }
-
-// class GardenApp extends MaterialApp {
-//   const GardenApp({Key? key}) : super(key: key, home: const GardenPage(),);
-// }
