@@ -149,7 +149,7 @@ class _$PlantDAO extends PlantDAO {
   }
 
   @override
-  Future<Plant?> deleteUser(int id) async {
+  Future<Plant?> deletePlant(int id) async {
     return _queryAdapter.query('DELETE FROM plant WHERE id = ?1',
         mapper: (Map<String, Object?> row) => Plant(
             id: row['id'] as int?,
@@ -198,7 +198,7 @@ class _$TypeDAO extends TypeDAO {
 
   @override
   Future<PlantType?> getTypeById(int id) async {
-    return _queryAdapter.query('SELECT * FROM plant WHERE id = ?1',
+    return _queryAdapter.query('SELECT * FROM type WHERE id = ?1',
         mapper: (Map<String, Object?> row) =>
             PlantType(id: row['id'] as int?, name: row['name'] as String),
         arguments: [id]);

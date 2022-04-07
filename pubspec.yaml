@@ -23,17 +23,16 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   dartz: ^0.10.1
-
   floor: ^1.2.0
-
   flutter:
     sdk: flutter
-
   flutter_bloc: ^8.0.0
 
   # FreeZed
   freezed: ^1.1.0
   freezed_annotation: ^1.1.0
+
+  intl: ^0.17.0
 
 dev_dependencies:
   build_runner: ^2.1.2

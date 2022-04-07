@@ -9,7 +9,7 @@ abstract class TypeDAO {
   @Query('SELECT * FROM type')
   Future<List<PlantType>> retrieveAllTypes();
 
-  @Query('SELECT * FROM plant WHERE id = :id')
+  @Query('SELECT * FROM type WHERE id = :id')
   Future<PlantType?> getTypeById(int id);
 
   @Query('SELECT * FROM type WHERE name = :name')

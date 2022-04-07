@@ -1,5 +1,5 @@
+import 'package:garden/common/state/bloc_state.dart';
 import 'package:garden/model/plant.dart';
-import 'package:garden/state/bloc_state.dart';
 
 class HomeDataState extends BlocState {
   final List<Plant> plants;

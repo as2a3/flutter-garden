@@ -11,10 +11,10 @@ class PlantType {
     required this.name,
   });
 
-  // PlantType.fromMap(Map<String, dynamic> res)
-  //     : id = res['id'],
-  //       name = res['name'];
-  //
+  PlantType.fromMap(Map<String, dynamic> res)
+      : id = res['id'],
+        name = res['name'];
+
   Map<String, Object?> toMap() {
     return {
       'id': id,

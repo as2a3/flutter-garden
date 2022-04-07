@@ -16,5 +16,5 @@ abstract class PlantDAO {
   Future<List<Plant>> retrievePlants(int page);
 
   @Query('DELETE FROM plant WHERE id = :id')
-  Future<Plant?> deleteUser(int id);
+  Future<Plant?> deletePlant(int id);
 }

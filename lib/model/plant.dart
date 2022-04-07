@@ -1,6 +1,7 @@
 import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
 import 'package:garden/model/type.dart';
+import 'package:intl/intl.dart';
 
 @Entity(
   tableName: 'plant',
@@ -38,12 +39,22 @@ class Plant {
         plantingDate = res['planting_date'],
         typeId = res['typeId'];
 
-  Future<Map<String, Object?>> toMap(BuildContext? context) async {
+  Map<String, Object?> toMap(BuildContext? context) {
     return {
       'id': id,
       'name': name,
       'planting_date': DateTime.fromMillisecondsSinceEpoch(plantingDate),
       'type_id': typeId,
     };
+  }
+
+  String get getTwoLetters {
+    if (name.isEmpty) {
+      return '';
+    }
+    if (name.length == 1) {
+      return name.toUpperCase();
+    }
+    return '${name[0].toUpperCase()}${name[name.length - 1].toUpperCase()}';
   }
 }
