@@ -1,7 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:flutter/material.dart';
 import 'package:garden/model/type.dart';
-import 'package:intl/intl.dart';
 
 @Entity(
   tableName: 'plant',
@@ -17,11 +15,11 @@ import 'package:intl/intl.dart';
 class Plant {
   @PrimaryKey(autoGenerate: true)
   int? id;
-  final String name;
+  late String name;
   @ColumnInfo(name: 'planting_date')
-  final int plantingDate;
+  late int plantingDate;
   @ColumnInfo(name: 'type_id')
-  final int typeId;
+  late int typeId;
   @ignore
   PlantType? type;
 
@@ -39,7 +37,7 @@ class Plant {
         plantingDate = res['planting_date'],
         typeId = res['typeId'];
 
-  Map<String, Object?> toMap(BuildContext? context) {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
       'name': name,

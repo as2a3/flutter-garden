@@ -73,7 +73,7 @@ class DatabaseRepository extends Cubit<GardenDatabase?> {
 
   Future<Either<String, List<Plant>>> getAllPlants(int page) async {
     try {
-      final plants = await database!.plantsDAO.retrievePlants(page);
+      final plants = await database!.plantsDAO.retrievePlants(page * 10);
       for(Plant plant in plants) {
         final type = await getPlantType(plant.typeId);
         String error = '';
@@ -95,6 +95,23 @@ class DatabaseRepository extends Cubit<GardenDatabase?> {
         return const Left('No Item');
       }
       return Right(type);
+    } catch (error) {
+      return Left(error.toString());
+    }
+  }
+
+  Future<Either<String, List<Plant>>> searchPlants(String key) async {
+    try {
+      final plants = await database!.plantsDAO.searchPlants('%$key%');
+      for(Plant plant in plants) {
+        final type = await getPlantType(plant.typeId);
+        String error = '';
+        type.fold((l) => error = l, (r) => plant.type = r,);
+        if (error.isNotEmpty) {
+          return Left(error);
+        }
+      }
+      return Right(plants);
     } catch (error) {
       return Left(error.toString());
     }

@@ -116,6 +116,16 @@ class _$PlantDAO extends PlantDAO {
                   'name': item.name,
                   'planting_date': item.plantingDate,
                   'type_id': item.typeId
+                }),
+        _plantUpdateAdapter = UpdateAdapter(
+            database,
+            'plant',
+            ['id'],
+            (Plant item) => <String, Object?>{
+                  'id': item.id,
+                  'name': item.name,
+                  'planting_date': item.plantingDate,
+                  'type_id': item.typeId
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -125,6 +135,8 @@ class _$PlantDAO extends PlantDAO {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Plant> _plantInsertionAdapter;
+
+  final UpdateAdapter<Plant> _plantUpdateAdapter;
 
   @override
   Future<Plant?> getPlantById(int id) async {
@@ -149,6 +161,17 @@ class _$PlantDAO extends PlantDAO {
   }
 
   @override
+  Future<List<Plant>> searchPlants(String key) async {
+    return _queryAdapter.queryList('SELECT * FROM plant WHERE name LIKE ?1',
+        mapper: (Map<String, Object?> row) => Plant(
+            id: row['id'] as int?,
+            name: row['name'] as String,
+            plantingDate: row['planting_date'] as int,
+            typeId: row['type_id'] as int),
+        arguments: [key]);
+  }
+
+  @override
   Future<Plant?> deletePlant(int id) async {
     return _queryAdapter.query('DELETE FROM plant WHERE id = ?1',
         mapper: (Map<String, Object?> row) => Plant(
@@ -169,6 +192,11 @@ class _$PlantDAO extends PlantDAO {
   Future<int> insertPlant(Plant plant) {
     return _plantInsertionAdapter.insertAndReturnId(
         plant, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> editPlant(Plant plant) async {
+    await _plantUpdateAdapter.update(plant, OnConflictStrategy.abort);
   }
 }
 
