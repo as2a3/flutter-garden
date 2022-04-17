@@ -100,7 +100,8 @@ class PlantItemWidget extends StatelessWidget {
                         children: [
                           Text(
                             getDateInCustomFormat(
-                              DateTime.fromMillisecondsSinceEpoch(items[index].plantingDate),
+                              DateTime.fromMillisecondsSinceEpoch(
+                                  items[index].plantingDate),
                             ),
                           ),
                           const SizedBox(
@@ -131,7 +132,9 @@ class PlantItemWidget extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: () => onDelete?.call(items[index]),
-                    child: const Icon(Icons.delete,),
+                    child: const Icon(
+                      Icons.delete,
+                    ),
                   ),
                 ),
               ),

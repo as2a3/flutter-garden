@@ -18,11 +18,11 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^8.0.3
-  bloc_test: ^9.0.3
 
   cupertino_icons: ^1.0.2
 
   dartz: ^0.10.1
+  equatable: ^2.0.3
   floor: ^1.2.0
   flutter:
     sdk: flutter
@@ -33,13 +33,16 @@ dependencies:
   freezed_annotation: ^1.1.0
 
   intl: ^0.17.0
+  stream_transform: ^2.0.0
 
 dev_dependencies:
+  bloc_test: ^9.0.3
   build_runner: ^2.1.2
   floor_generator: ^1.2.0
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true

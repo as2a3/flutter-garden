@@ -1,13 +1,13 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:garden/app.dart';
-import 'package:garden/garden_bloc_observer.dart';
+import 'package:garden/database/database_repository.dart';
 
-void main() {
-  BlocOverrides.runZoned(
-    () => runApp(
-      const GardenApp(),
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final dbRepository = await DatabaseRepository().init();
+  runApp(
+    GardenApp(
+      databaseRepository: dbRepository,
     ),
-    blocObserver: GardenBlocObserver(),
   );
 }
