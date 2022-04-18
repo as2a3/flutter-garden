@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DeletePlantEvent>(_deletePlant);
     on<TextChanged>(_onTextChanged, transformer: debounce(_duration));
   }
-  final DatabaseRepository databaseRepository;
+  late DatabaseRepository databaseRepository;
 
   List<Plant> plants = <Plant>[];
   int page = 0;
@@ -106,7 +106,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           (l) => null,
           (plant) {
         plants.add(plant);
-        showAppSnackBar(context: event.context, msg: 'Plant ${plant.name} is added.',);
+        if (event.context != null) {
+          showAppSnackBar(
+            context: event.context!, msg: 'Plant ${plant.name} is added.',);
+        }
         emit(
           SuccessState(
             items: plants,

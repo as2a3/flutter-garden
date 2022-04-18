@@ -25,8 +25,8 @@ class GetPlantsEvent extends HomeEvent {
 }
 
 class AddPlantEvent extends HomeEvent {
-  const AddPlantEvent({required this.context, required this.plant});
-  final BuildContext context;
+  const AddPlantEvent({this.context, required this.plant});
+  final BuildContext? context;
   final Plant plant;
 
   @override
